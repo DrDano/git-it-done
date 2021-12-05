@@ -22,17 +22,27 @@ var getUserRepos = function(user) {
 
 
     fetch(apiUrl).then(function(response) {
-        response.json().then(function(data) {
-            displayRepos(data, user);
-        });
-    });
+        if (response.ok) {
+            response.json().then(function(data) {
+                displayRepos(data, user);
+            });
+        } else {
+            alert("Error: GitHub User Not Found");
+        }
+    })
+    .catch(function(error) {
+        alert("Unable to connect to GitHub")
+    })
 };
 
 var displayRepos = function(repos, searchTerm) {
+    if (repos.length === 0) {
+        repoContainerEl.textContent = "No repositories found.";
+
+        return ;
+    }
     repoContainerEl.textContent = "";
     repoSearchTermEl.textContent = searchTerm;
-    console.log(repos);
-    console.log(searchTerm);
 
     for (let i = 0; i < repos.length; i++) {
         var repoName = repos[i].owner.login + "/" + repos[i].name;
