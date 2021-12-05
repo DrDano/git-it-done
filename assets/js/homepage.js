@@ -21,9 +21,14 @@ var getUserRepos = function(user) {
 
     fetch(apiUrl).then(function(response) {
         response.json().then(function(data) {
-            console.log(data)
+            displayRepos(data, user);
         });
     });
 };
+
+var displayRepos = function(repos, searchTerm) {
+    console.log(repos);
+    console.log(searchTerm);
+}
 
 userFormEl.addEventListener("submit", formSubmitHandler);
