@@ -1,3 +1,5 @@
+var issuecontainerEl = document.querySelector("#issues-container");
+
 var getRepoIssues = function(repo) {
     var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
 
@@ -12,9 +14,14 @@ var getRepoIssues = function(repo) {
     });
 }
 
-getRepoIssues("facebook/react");
+getRepoIssues("DrDano/Algorigthms");
 
 var displayIssues = function(issues) {
+    if (issues.length === 0) {
+        issuecontainerEl.textContent = "This repo has no open issues!";
+        return;
+    }
+
     for (let i = 0; i < issues.length; i++) {
         var issueEl = document.createElement("a");
         issueEl.classList = "list-item flex-row justify-space-between align-center";
@@ -34,5 +41,7 @@ var displayIssues = function(issues) {
         }
 
         issueEl.appendChild(typeEl);
+
+        issuecontainerEl.appendChild(issueEl);
     }
 };
