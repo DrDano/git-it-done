@@ -8,13 +8,14 @@ var getRepoIssues = function(repo) {
             response.json().then(function(data) {
                 displayIssues(data);
             });
-        } else {
-            alert("There was a problem with your request!");
+        };
+        if (response.headers.get("Link")) {
+            console.log("repo has more than 30 issues");
         }
     });
 }
 
-getRepoIssues("DrDano/Algorigthms");
+getRepoIssues("facebook/react");
 
 var displayIssues = function(issues) {
     if (issues.length === 0) {
