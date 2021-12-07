@@ -84,7 +84,11 @@ var displayRepos = function(repos, searchTerm) {
 
 function buttonClickHandler(event) {
     var language = event.target.getAttribute("data-language");
-    console.log(language);
+
+    if (language) {
+        getFeaturedRepos(language);
+        repoContainerEl.textContent = "";
+    }
 }
 
 userFormEl.addEventListener("submit", formSubmitHandler);
